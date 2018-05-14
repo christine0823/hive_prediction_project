@@ -27,10 +27,9 @@ print "=========Read "+input_file+"========"
 X, Number, Types, Records = label_features(input_file)
 print "Size : " + str(len(Number))
 feature_dim = len(X[0])
-print X[0]
+
 print "=========Preprocessing========"
-scaler_filename = "../models/"+scaler_file+".scl.pkl"
-Xnew = data_preprocessing(X, Number, Types, Records,scaler_filename)
+Xnew = data_preprocessing(X, Number, Types, Records,scaler_file)
 feature_dim = len(Xnew[0])
 print Xnew[0]
 
@@ -64,5 +63,5 @@ import csv
 # save model
 clf.save(model_file) 
 #print error_list
-#print "Training error rate:"
-#error_list = print_error(Ypredicted, Number, range(0,train_num), False)
+print "Training error rate:"
+error_list = print_error(Ypredicted, Number, range(0,train_num), False)

@@ -99,7 +99,7 @@ def Keras_train(trainX, trainT, trainR, testX, testT, testR, feature_dim):
 				batcht = np.reshape(batcht,(1,batcht.shape[0],5))
 				yield (batchx, [batcht, batchr])
 	
-	model.load_weights("../models/jobinfo_query2.h5")
+	#model.load_weights("../models/jobinfo_query2.h5")
 	model.fit_generator(batch_generation(trainX, trainT, trainR), steps_per_epoch=len(trainX), 
 			validation_data=batch_generation(testX, testT, testR), validation_steps=len(testX),
 			epochs=20,callbacks=[checkpoint])

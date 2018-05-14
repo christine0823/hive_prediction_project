@@ -28,44 +28,16 @@ def read_file(input_file, X, y):
 	print "Read : "+str(np.array(X).shape)
 	f.close()
 
-def read_metrics_file(input_file, X, mcnt):
-        f = open(input_file, 'rb')
-	
-	max_length = 24
-        for row in csv.reader(f):
-                row = [float(i) if i else 0 for i in row]
-
-                dim = len(row)
-                
-		if dim%2 == 1:
-			dim = dim - 1
-			row = row[:-1]
-
-		num_of_feature = dim / mcnt
-		
-                row=np.array(row).reshape((mcnt,num_of_feature))
-		
-		for i in range(len(row[0])):
-			row[0][i] = row[0][i] - min(row[0])
-			row[1][i] = row[1][i] - min(row[1])
-					
-		row2 = np.zeros((mcnt, max_length))
-               	row2[0][:len(row[0])] = row[0]
-		row2[1][:len(row[1])] = row[1]
-       		X.append(row2)
- 
-	print "Read : "+str(np.array(X).shape)
-	
-        f.close()
-
-
 def data_preprocessing(X, Number, Types, Records,scaler_filename):
 	scalerX = preprocessing.MinMaxScaler([0,1.0])
 	
 	X = scalerX.fit_transform(X)
 	
 	from sklearn.externals import joblib
-	joblib.dump(scalerX, scaler_filename) 
+	
+	print scaler_filename
+	if scaler_filename != None:
+		joblib.dump(scalerX, scaler_filename) 
 	
 	X_proccessed = []	
 	t_proccessed = []

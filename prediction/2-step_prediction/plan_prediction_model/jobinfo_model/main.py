@@ -16,7 +16,7 @@ parser.add_argument("--m")
 args = parser.parse_args()
 
 input_file = args.i
-output_file = args.s
+scaler_file = args.s
 model_file = args.m
 X = []
 Number = []
@@ -27,14 +27,10 @@ print "=========Read "+input_file+"========"
 X, Number, Types, Records = label_features(input_file)
 print "Size : " + str(len(Number))
 feature_dim = len(X[0])
-print X[0]
-print "=========Preprocessing========"
-scaler_filename = "../models/"+output_file+".scl.pkl"
-Xnew ,tnew, rnew = data_preprocessing(X, Number, Types, Records,scaler_filename)
 
-print Xnew[0]
-#print Number[:5]
-print rnew[:5]
+print "=========Preprocessing========"
+Xnew ,tnew, rnew = data_preprocessing(X, Number, Types, Records,scaler_file)
+
 train_num = int(len(rnew) * 0.9)
 total_num = int(len(rnew))
 #train_num = total_num - 20
@@ -73,11 +69,7 @@ import csv
 #f.close()
 
 # save model
-clf.save(model_file) 
+#clf.save(model_file) 
 #print error_list
 #print "Training error rate:"
-#error_list = print_error(Ypredicted, target, range(train_num,train_num+4), False)
-#error_list = print_error(Ypredicted, target, range(train_num+4,train_num+8), False)
-#error_list = print_error(Ypredicted, target, range(train_num+8,train_num+12), False)
-#error_list = print_error(Ypredicted, target, range(train_num+12,train_num+16), False)
-#error_list = print_error(Ypredicted, target, range(train_num+16,train_num+20), False)
+error_list = print_error(Ypredicted, target, range(0,train_num), False)

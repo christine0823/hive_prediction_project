@@ -62,8 +62,8 @@ def binarylabel(isLabel, X):
         binaryle = preprocessing.LabelBinarizer()
 	
 	from sklearn.externals import joblib
-        label_filename = "../models/jobtype_binarylabel.pkl"
-        #joblib.dump(binaryle, label_filename)
+        import os.path
+	label_filename = "jobtype_binarylabel.pkl"
 
         Xlabel = []
 	binaryle_table = dict()
@@ -74,7 +74,11 @@ def binarylabel(isLabel, X):
                         if i != 0:
 				binaryle.fit(Xzipped[i])
                         else:
-				binaryle = joblib.load(label_filename)
+				if os.path.exists(label_filename):
+					binaryle = joblib.load(label_filename)
+				else:
+					binaryle.fit(Xzipped[i])
+
 			print binaryle.classes_
 			#Xlabel.append(le.transform(Xzipped[i]))
                         #print str(i) + ":" + str(binaryle.classes_)

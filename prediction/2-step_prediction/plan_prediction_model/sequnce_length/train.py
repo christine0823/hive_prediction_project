@@ -83,7 +83,7 @@ def Keras_train(trainX, trainN, testX, testN, feature_dim):
 	testN = np.array(testN)
 	trainX = np.array(trainX)
         testX = np.array(testX)
-	model.load_weights("../models/jobnum_query2.h5")
+	#model.load_weights("../models/jobnum_query2.h5")
 	model.fit(trainX, trainN, validation_data=(testX, testN), batch_size=1,
 			epochs=20,callbacks=[checkpoint,earlyStopping])
 	score = model.evaluate(testX, testN)
