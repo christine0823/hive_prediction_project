@@ -29,7 +29,6 @@ print "Size : " + str(len(y))
 feature_dim = len(X[0])
 
 print "=========Preprocessing========"
-#scaler_filename = "../models/"+scaler_file+".scl.pkl"
 Xnew ,ynew, tnew = data_preprocessing(X, Number, y, Time)
 
 print Xnew[0]
@@ -39,10 +38,10 @@ print "Features : "+ str(feature_dim)
 
 #train_num = total_num - 100
 print "Dataset size ",total_num
-scale = joblib.load('../plan_table/'+query+'_scale.pkl')
+records = joblib.load('../plan_table/'+query+'_scale.pkl')
 
 print "=========Load========"
-scalerX = joblib.load('../models/rnn_'+query+'.scl.pkl')
+scaleX = joblib.load('../models/rnn_'+query+'.scl.pkl')
 clf = load_model('../models/rnn_'+query+'.h5')
 
 # Step 1 : read jobinfo model
@@ -122,11 +121,11 @@ def transform(x, record):
 
 error_list = []
 print len(Xnew)
-print len(scale)
+print len(records)
 for i in range(train_num,train_num+40):
 	print i
 	#print Xnew[i]
-	transformX = transform(Xnew[i],scale[i])
+	transformX = transform(Xnew[i],records[i])
         tmp = clf.predict(transformX)
         print tmp[0][0],
 	print tnew[i]
