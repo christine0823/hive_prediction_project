@@ -4,7 +4,9 @@
 * Running on Hadoop 2.7.1 + Hive 2.3.0
 * Workload : hive-testbench
 [https://github.com/hortonworks/hive-testbench](https://)
-* sudo apt-get install jq
+* sudo apt-get install jq ==(for json format)==
+* hadoop-logs : query2 / query3 /query5 / query8
+* genTrainingData 
 
 ### 2-step prediction
 * 2-step prediction
@@ -18,6 +20,10 @@
                        --s [predefined scalerfile].scl.pkl 
                        --m [save_model_path]
         ```
-### Optimization 
-  
+    * testing
+### Optimization
 
+### Baseline
+* Equation
+* Simulation
+* DNN
