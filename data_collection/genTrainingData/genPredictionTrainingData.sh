@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ROOT=~/hive_prediction
-
 if [ "$2" = "" ]; then
         echo "usage: sh genTrainingData.sh IN_FILE OUT_FILE"
         exit 0;
@@ -10,19 +8,25 @@ fi
 rm $2
 #data_size_list=$(cat $1 | jq .)
 
-
 last_queryid=""
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
 
 	job_state=$(echo $line | jq .job.state | tr -d '\"')
 	queryid=$(echo $line | jq .queryid | tr -d '\"' | tr -d ' ')
-	#echo $queryid
-
+	echo $queryid
+	
 	if [ "$job_state" == "SUCCEEDED" ] && [ "$queryid" != "$last_queryid" ]; then
 		queryid=$(echo $line | jq .queryid | tr -d '\"' | tr -d ' ')
 		total_time=$(echo $line | jq .total_time | tr -d '\"')
 		job_num=$(grep $queryid $1 | wc -l)
+		
+		check=$(echo $total_time | grep [0-9])
+		if [ "$check" == "" ]; then
+			last_queryid=$queryid
+			continue
+		fi
+	
 		echo $total_time,$job_num >>$2		
 		
 		grep $queryid $1 > tmp	
@@ -38,24 +42,16 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
  			echo $line > line_out	
 			#echo $job_type
 			if [ "$job_state" = "SUCCEEDED" ]; then
-				bash jsonFilter1.sh "line_out" >> $2
-                		#bash mergeProfile.sh $PROFILE_LOG $job_type >> $2
+				bash jsonFilter.sh "line_out" >> $2
 			else
-				echo "fail" >> $2
+				echo "Fail, please delete the samples!" >> $2
 				break
 			fi
 			echo "" >>$2
 		done
-		if [ $i -ne $((job_num+1)) ]; then
-			echo $i
-			echo "Check!!"
-		fi 
 		last_queryid=$queryid
 	fi
 done < "$1"
 
 
-sed -i "s/-Xmx//g" $2
-sed -i "s/m//g" $2
-
-#bash firsh_label.sh $2
+bash firsh_label.sh $2
