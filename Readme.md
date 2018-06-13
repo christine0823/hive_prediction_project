@@ -1,19 +1,28 @@
-## Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
+## Readme
 
 ### Data collection
 * Running on Hadoop 2.7.1 + Hive 2.3.0
 * Workload : [https://github.com/hortonworks/hive-testbench](https://)
+#### Run query logs and collect logs
 * sudo apt-get install jq ==(for json format)==
-* hadoop-logs : query2 / query3 /query5 / query8
+
+#### Profile and generate training data
 * genTrainingData 
-    * ==Per query==
-        * total_running_time, DAG_sequence_length
-    * ==Per job== : 
-        * job_execution_time, operation_type, input_reocrds, dataset(++estimated total records++) ,[Hadoop and Hive configurations]
+    * Per query
+        * Total running time
+        * DAG_sequence_length
+        * Dataset scale
+        * Hadoop and Hive configurations
+    * Per job
+        * Job execution time
+        * Operation type
+        * Input_reocrds 
     * Generate output
     ```javascript
     bash genPredictionTrainingData.sh [query].log ../data/[query].csv
     ```
+* data
+    * query2.csv/query3.csv/query5.csv/query8.csv
 
 ### Oracle
 * 2-step prediction
