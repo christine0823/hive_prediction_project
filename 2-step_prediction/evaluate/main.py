@@ -1,8 +1,7 @@
 import numpy as np
 from label import *
 from preprocessing import *
-from train import *
-from test import *
+from test import * 
 from sklearn.externals import joblib
 from sklearn.externals import joblib
 from keras.models import load_model
@@ -37,9 +36,6 @@ print "Features : "+ str(feature_dim)
 #train_num = total_num - 100
 print "Dataset size ",total_num
 
-print Xnew[total_num-1]
-print Dnew[total_num-1]
-print ynew[total_num-1]
 print "=========Load Model========"
 scalerX = joblib.load('../models/'+query+'_time.scl.pkl')
 clf = load_model('../models/'+query+'_time.h5')

@@ -44,8 +44,6 @@ def Keras_train(trainX, trainT, trainR, testX, testT, testR, feature_dim):
 	record_output = TimeDistributed(Dense(16, activation='relu'))(record_output)
 	record_output = TimeDistributed(Dense(16, activation='relu'))(record_output)
 	record_output = TimeDistributed(Dense(16, activation='relu'))(record_output)
-	record_output = TimeDistributed(Dense(16, activation='relu'))(record_output)
-	record_output = TimeDistributed(Dense(16, activation='relu'))(record_output)
 	record_output = TimeDistributed(Dense(1, activation='linear'), name = 'record_output')(record_output)
 
 	model = Model(inputs=input1, outputs=[type_output,record_output])
@@ -68,7 +66,7 @@ def Keras_train(trainX, trainT, trainR, testX, testT, testR, feature_dim):
 	
 	model.fit_generator(batch_generation(trainX, trainT, trainR), steps_per_epoch=len(trainX), 
 			validation_data=batch_generation(testX, testT, testR), validation_steps=len(testX),
-			epochs=500,callbacks=[checkpoint,earlyStopping])
+			epochs=100,callbacks=[checkpoint,earlyStopping])
 	score = model.evaluate_generator(batch_generation(testX, testT, testR), steps=len(testX))
 	print
         print "Score: ",

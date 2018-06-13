@@ -36,8 +36,8 @@ def data_preprocessing(X, Number, y, Time, scaler_filename):
 			time.append(Time[j])
 			
 			# Reducer
-			#if float(X[j][9]) > max_reducer:
-                        #        max_reducer=float(X[j][9])
+			if float(X[j][9]) > max_reducer:
+                                max_reducer=float(X[j][9])
 
 		row = [float(r) for r in row]
 		time = [float(t)/1000.0 for t in time]
@@ -46,8 +46,8 @@ def data_preprocessing(X, Number, y, Time, scaler_filename):
 		row2=np.array(row).reshape((number_of_jobs,num_of_feature))
 		time2=np.array(time).reshape((number_of_jobs,1))
 		
-		#for k in range(number_of_jobs):
-                #        row2[k][9] = max_reducer
+		for k in range(number_of_jobs):
+                        row2[k][9] = max_reducer
 	
                 X_proccessed.append(row2)
 		t_processed.append(time2)
