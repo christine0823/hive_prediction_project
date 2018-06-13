@@ -1,4 +1,4 @@
-#Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
+# Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
 
 ## Data collection
 
