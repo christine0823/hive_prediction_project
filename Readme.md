@@ -1,5 +1,4 @@
-## Readme
-
+## Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
 ### Data collection
 * Running on Hadoop 2.7.1 + Hive 2.3.0
 * Workload : [https://github.com/hortonworks/hive-testbench](https://)
