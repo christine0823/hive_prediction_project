@@ -1,0 +1,21 @@
+using thread
+begin
+topology created
+done parsing, totally 2 chunks
+scheduler created
+NN and JT created
+file_00000000:0:0:67108864: scheduled to n_rg0_0_ng0_0 locally
+file_00000000:1:0:67108864: rack remote to n_rg0_0_ng0_0, on n_rg0_0_ng0_1
+53.61472000: _o201 map task start file_00000000:0:0:67108864 _o18
+53.61616000: _o210 map task start file_00000000:1:0:67108864 _o18
+53.61808000: reducer(_o220) started on node(_o37)
+1465.77864: _o201 map finish _o18 file_00000000:0:0:67108864
+5046.085559: _o210 map finish _o18 file_00000000:1:0:67108864
+6709.979175: _o220 on _o37 === shuffle finished
+28763.80117: _o220 on _o37 === sort finished
+28766.20165: (1 / 1) reducers done
+Total runtime: 28.766201655999179
+command='_o36 insert _o294'
+chain=_o286 units=7144.124000 epsilon=10000.000000
+command='_o53 insert _o351'
+chain=_o330 units=240.873800 epsilon=10000.000000

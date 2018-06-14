@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topo xsi:noNamespaceSchemaLocation="topology.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<machine_type>
+                <name>Worker node</name>
+                <disk>
+                        <type>Seagate</type>
+                        <capa>300</capa>
+                        <num>1</num>
+                </disk>
+                <disk>
+			<type>Seagate</type>
+			<capa>600</capa>
+			<num>1</num>
+		</disk>
+		<cpu>
+			<type>Xeon 2.93GHz</type>
+			<number_of_cores>6</number_of_cores>
+			<num>2</num>
+		</cpu>
+		<mem>
+			<type>ECC</type>
+			<capa>12288</capa>
+		</mem>
+		<nic>
+			<type>10Gbps</type>
+			<num>1</num>
+		</nic>
+	</machine_type>
+	<switch_type>
+		<name>48 ports - 1 Gbps</name>
+		<buffer_size>128</buffer_size>
+		<buffer>common</buffer>
+		<fabric>true</fabric>
+	</switch_type>
+	<switch_type>
+		<name>sw_type_2</name>
+		<buffer_size>64</buffer_size>
+		<buffer>common</buffer>
+		<fabric>true</fabric>
+	</switch_type>
+	<rack_group>
+		<compute_node_group>
+			<machine_type_name>Worker node</machine_type_name>
+			<node_index>00</node_index>
+			<node_index>01</node_index>
+			<node_index>02</node_index>
+		</compute_node_group>
+		<switch>
+			<switch_type_name>48 ports - 1 Gbps</switch_type_name>
+			<switch_index>1</switch_index>
+		</switch>
+		<rack_index>1</rack_index>
+	        <rack_index>2</rack_index>
+
+<!--		<rack_index>3</rack_index>
+		<rack_index>4</rack_index>
+		<rack_index>5</rack_index>
+-->
+		<name>rg1</name>
+	</rack_group>
+	<router>
+		<connect_to_group>
+			<rack_group_name>rg_rg0</rack_group_name>
+			<switch_index>1</switch_index>
+		</connect_to_group>
+		<name>r1</name>
+	</router>
+<!--
+-->
+	<data_nodes>3</data_nodes>
+	<job_tracker>n_rg0_1_ng0_1</job_tracker>
+	<topology>star</topology>
+</topo>

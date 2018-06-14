@@ -1,0 +1,5 @@
+set cycles_per_byte 0.00031358022795
+set sort_cycles_per_byte 370.774865
+set merge_cycles 9.05956*1000*1000*1000
+set reduce_sort_cycles 9.05956*6.0*1000*1000*1000
+set reduce_cycles_per_byte 0.000572730641961

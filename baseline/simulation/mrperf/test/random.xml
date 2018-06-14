@@ -1,0 +1,7 @@
+<?xml version="1.0" ?><root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="metadata.xsd">
+	<chunk_size>64</chunk_size>
+	<name_node>jt</name_node>
+	<dir name="/data">
+		
+	<file name="file_00000000"><chunk id="0"><rep>d_rg0_0_ng0_0_disk0</rep></chunk><chunk id="1"><rep>d_rg0_0_ng0_1_disk0</rep></chunk></file></dir>
+</root>

@@ -1,4 +1,4 @@
-# Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
+#Oracle: A Deep Learning Model for Predicting andOptimizing Complex Query Workflow
 
 ## Data collection
 
@@ -14,7 +14,7 @@
     ```
 * Run hive queies
     ```javascript
-    bash run_hive.sh [query index] [index of datasets]
+    bash run_hive.sh [query index] [datasets]
     E.g. bash run_hive.sh 1 4
     ```
     * Input : hive-testbench/sample-queries-tpch/tpch_query${sqlid}.sql
@@ -108,9 +108,8 @@
 ### Baseline
 * Equation
     * Input
-        * dags[idx].csv 
-        (Ex. Map_TotalRecords, Map_AverageBytes, Reduce_TotalRecords, Reduce_AverageBytes....)
-        * testtypes/[operation].csv
+        * dags/dag${idx}.csv
+        * testtypes/${operation}.csv
         * workflow equation for DAG structure
     * Output 
         * Each job time
@@ -119,8 +118,19 @@
     python equation.py
 ```
 * Simulation
-
+    * Install mrperf
+        * http://research.cs.vt.edu/dssl/mrperf/
+    * Run simulation
+        * Input 
+            mrperf/test/simulation/simulation${DAGidx}.csv
+        * Output
+            mrperf/test/time/${DAGidx}_${Jobidx}.out
+    ```javascript
+    cd mrperf/test
+    bash run.sh [DAGidx] [Datasetidx] [JobLen]
+    ```
 * DNN
+    * Input : Hive and Hadoop configurations
 ```javascript
     python main.py --i ~/hive_prediction_project/data/query${sqlid}.csv
 ```
