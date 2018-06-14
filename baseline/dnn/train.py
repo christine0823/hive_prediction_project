@@ -12,43 +12,6 @@ from keras.callbacks import *
 from keras.layers import *
 from keras.models import Model
 
-def Keras_autoencoder(Mx, num_jobs):
-
-        Mx = np.array(Mx)
-        Mx_out = []
-        for i in range(Mx.shape[1]):
-                input_vec = Input(shape=(Mx.shape[2],))
-
-                # encoder layers
-                encoding_dim = 4
-                mask = Masking(mask_value=0.0)(input_vec)
-                encoded = Dense(24, activation='relu')(mask)
-                encoded = Dense(16, activation='relu')(encoded)
-		encoded = Dense(8, activation='relu')(encoded)
-                encoder_output = Dense(encoding_dim)(encoded)
-
-                # decoder layers
-                decoded = Dense(8, activation='relu')(encoder_output)
-                decoded = Dense(16, activation='relu')(decoded)
-                decoded = Dense(24, activation='relu')(decoded)
-
-                # construct the autoencoder model
-                autoencoder = Model(input=input_vec, output=decoded)
-
-                # construct the encoder model for plotting
-                encoder = Model(input=input_vec, output=encoder_output)
-
-                # compile autoencoder
-                autoencoder.compile(optimizer='adam', loss='mse')
-
-                # training
-                autoencoder.fit(Mx[:,i,:], Mx[:,i,:], epochs=10, batch_size=16, verbose=1)
-                out = encoder.predict(Mx[:,i,:])
-                out = out.reshape(int(Mx.shape[0] / num_jobs), num_jobs*encoding_dim)
-		Mx_out.append(out)
-
-        return Mx_out[0], Mx_out[1]
-
 def Keras_train(trainX, trainY, testX, testY, feature_dim):
       	
 	trainY=np.array(trainY).reshape(-1,1)

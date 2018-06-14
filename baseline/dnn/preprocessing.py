@@ -7,58 +7,6 @@ from sklearn.feature_selection import f_regression
 from sklearn.decomposition import PCA,TruncatedSVD
 from sklearn.ensemble import RandomForestRegressor
 
-def read_file(input_file, X, y):
-	f = open(input_file, 'rb')
-	
-	for row in csv.reader(f):
-        	row = [float(i) if i else 0 for i in row]
-
-		total_time = row[0]
-                number_of_jobs=int(row[1])
-		row2=row[2:]
-		
-		dim = len(row2)
-		num_of_feature = dim / number_of_jobs
-		
-		row3=np.array(row2).reshape((number_of_jobs,num_of_feature))
-		
-		X.append(row3)				
-                y.append(total_time)
-	
-	print "Read : "+str(np.array(X).shape)
-	f.close()
-
-def read_metrics_file(input_file, X, mcnt):
-        f = open(input_file, 'rb')
-	
-	max_length = 24
-        for row in csv.reader(f):
-                row = [float(i) if i else 0 for i in row]
-
-                dim = len(row)
-                
-		if dim%2 == 1:
-			dim = dim - 1
-			row = row[:-1]
-
-		num_of_feature = dim / mcnt
-		
-                row=np.array(row).reshape((mcnt,num_of_feature))
-		
-		for i in range(len(row[0])):
-			row[0][i] = row[0][i] - min(row[0])
-			row[1][i] = row[1][i] - min(row[1])
-					
-		row2 = np.zeros((mcnt, max_length))
-               	row2[0][:len(row[0])] = row[0]
-		row2[1][:len(row[1])] = row[1]
-       		X.append(row2)
- 
-	print "Read : "+str(np.array(X).shape)
-	
-        f.close()
-
-
 def data_preprocessing(X, Number, y):
 	scalerX = preprocessing.MinMaxScaler([0,1.0])
 	
@@ -78,11 +26,11 @@ def data_preprocessing(X, Number, y):
 		max_records = 0
 		
 		for n in range(start,start + number_of_jobs):
-			if X[n][0] > max_records:
-				max_records = X[n][0]
+			if X[n][2] > max_records:
+				max_records = X[n][2]
 	
 		row = X[start]
-		row[0] = max_records
+		row[2] = max_records
 		row = [float(r) for r in row]
 	
                 X_proccessed.append(row)

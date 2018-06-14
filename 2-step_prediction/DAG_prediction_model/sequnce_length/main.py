@@ -44,7 +44,7 @@ clf, score = Keras_train(Xnew[:train_num], Number[:train_num], Xnew[train_num:to
 print "=========Test========"
 Ypredicted = Keras_predict(clf, Xnew)
 #print [t for t in zip(Ypredicted[0:5], Number[0:5])]
-print [t for t in zip(Ypredicted[total_num-10:total_num], Number[total_num-10:total_num])][:10]
+print [t for t in zip(Ypredicted[train_num:total_num], Number[train_num:total_num])][:10]
 print "=========Result Display========"
 #error rate of test dataset
 print "Test error rate:"

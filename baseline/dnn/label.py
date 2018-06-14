@@ -19,7 +19,7 @@ def label_features(input_file):
 
 def read_file(input_file):
 	fin = open(input_file,'r');
-        flag = 0
+        numR = 0
         X = []
 	time = []
 	job_num = []
@@ -28,12 +28,14 @@ def read_file(input_file):
         	if len(row) == 2:
 			time.append(row[0])		
 			job_num.append(row[1])	
-		elif flag == 0:
-			X.append(row)
-			flag = 1 
+		elif numR == 0:
+			numR = 1
+		elif numR == 1:
+			X.append(row[3:])
+			numR = 2
 		else:
 			job_time.append(row[0])
-                        X.append(row[1:])        
+                        X.append(row[3:])        
         fin.close()	
 	
 	return X, time, job_num, job_time
@@ -64,8 +66,7 @@ def binarylabel(isLabel, X):
         for i in range(len(isLabel)):
                 if isLabel[i] == "1":
                         binaryle.fit(Xzipped[i])
-                        #Xlabel.append(le.transform(Xzipped[i]))
-                        #print str(i) + ":" + str(binaryle.classes_)
+                        print str(i) + ":" + str(binaryle.classes_)
 			labelarray = binaryle.transform(Xzipped[i])
                         
 			for j in range(labelarray.shape[1]):
@@ -74,8 +75,3 @@ def binarylabel(isLabel, X):
                         Xlabel.append(Xzipped[i])
         X = zip(*Xlabel)
         return X
-
-def write_file(labeled_file, results):
-	fout = open(labeled_file,'wb')
-        writer = csv.writer(fout)
-        writer.writerows(results)
