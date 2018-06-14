@@ -34,7 +34,7 @@
     * Generate output
         * json logs to csv
     ```javascript
-    bash genPredictionTrainingData.sh [query].log ../data/[query].csv
+    bash genPredictionTrainingData.sh query${sqlid}.log ../data/query${sqlid}.csv
     ```
 * data
     * query2.csv/query3.csv/query5.csv/query8.csv
@@ -77,7 +77,7 @@
         
 #### Command for evaluation
 ```javascript
-    python main.py --i [inputdata].csv --q [query]
+    python main.py --i [inputdata].csv --q query${sqlid}
 
     E.g. python main.py --i ../../data_collection/data/query2.csv 
                         --q query2
@@ -89,7 +89,7 @@
     * Output : hive_bound.csv / hive_bound_dag
     ```javascript
     python main_hive.py --i bound_only_dag.csv --o hive_bound 
-                        --s [scale] --q [query]
+                        --s [scale] --q query${sqlid}
     
     E.g. python main_hive.py --i bound_only_dag.csv --o hive_bound 
                              --s 5 --q query2
@@ -99,7 +99,7 @@
     * Output : hive_bound_all
     ```javascript
     python main_hive.py --i bound_only_dag.csv --o hive_bound 
-                        --s [scale] --q [query]
+                        --s [scale] --q query${sqlid}
     
     E.g. python main_hive.py --i bound_only_dag.csv --o hive_bound 
                              --s 5 --q query2
@@ -107,6 +107,22 @@
 
 ### Baseline
 * Equation
+    * Input
+        * dags[idx].csv 
+        (Ex. Map_TotalRecords, Map_AverageBytes, Reduce_TotalRecords, Reduce_AverageBytes....)
+        * testtypes/[operation].csv
+        * workflow equation for DAG structure
+    * Output 
+        * Each job time
+        * Total running time
+```javascript
+    python equation.py
+```
 * Simulation
+
 * DNN
+```javascript
+    python main.py --i ~/hive_prediction_project/data/query${sqlid}.csv
+```
+    
 
