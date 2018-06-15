@@ -61,6 +61,7 @@ def read_file(input_file):
 	f.close()
         
 
+# TOTAL_LAUNCHED_MAPS, MB_MILLIS_MAPS, MB_MILLIS_REDUCES, FILE_BYTES_WRITTEN, avgMergeTime, avgShuffleTime
 read_file(input_file)
 
 

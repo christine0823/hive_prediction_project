@@ -20,6 +20,7 @@ def LinearRegression_JobType():
 	types = ["Deux" ,"TableScan", "Group", "Join", "Select", "None"]
 	for t in types:
 		print t
+		# InputRecords, Time 
 		fin = open("testtypes/"+str(t)+".csv",'r');
 		X = []
 		y = []
@@ -45,6 +46,7 @@ def Reduce_Ops(JobType, TotalRecords):
 	
         return model.predict(np.array([TotalRecords]).reshape(1,-1))
 
+# MapInputRecords, ReduceInputRecords, MapOutputRecords, MapOutputBytes, RecuceOutputRecords, ReduceOutputBytes, Reducer, MapType, ReduceType
 def SingleJobCost(mipt, ript, mtr, mb, rtr, rb, reducer, mapType, reduceType):
         
 	#### Output Job Type #####
@@ -104,10 +106,10 @@ def SingleJobCost(mipt, ript, mtr, mb, rtr, rb, reducer, mapType, reduceType):
 
 LinearRegression_JobType()
 
-# Map_TotalRecords, Map_AverageBytes, Reduce_TotalRecords, Reduce_AverageBytes, reducer, mapType, reduceType
 # Record each dag in csv files
 fin = open("dags/dag1.csv",'r');
 
+# MAP_INPUT_RECORDS, REDUCE_INPUT_RECORDS, MAP_OUTPUT_RECORDS, MAP_OUTPUT_BYTES, RECORDS_OUT_0.reduce, HDFS_BYTES_WRITTEN.reduce
 Time = []
 cnt = 0
 for row in csv.reader(fin):
