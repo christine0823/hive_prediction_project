@@ -3,7 +3,7 @@
 ## Data collection
 #### Run query logs and collect logs
 * Running on Hadoop 2.7.1 + Hive 2.3.0
-* Workload : [https://github.com/hortonworks/hive-testbench](https://)
+* Workload : [https://github.com/hortonworks/hive-testbench](https://github.com/hortonworks/hive-testbench)
 * sudo apt-get install jq ==(for json format)==
 * Setup
     ```javascript
